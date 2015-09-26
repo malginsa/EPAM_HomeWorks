@@ -2,8 +2,8 @@ package HomeWork150924;
 
 public class ReverseList<T> {
 
-	Node<T> first;
-	Node<T> last;
+	private Node<T> first;
+	private Node<T> last;
 	
 	public void add(T data) {
 		Node<T> new_node = new Node<T>(data);
@@ -12,8 +12,8 @@ public class ReverseList<T> {
 		  this.last = new_node;
 		}
 		else {
-		  this.last.next = new_node;
-		  this.last = this.last.next;
+		  this.last.setNext(new_node);
+		  this.last = this.last.getNext();
 		}
 	}
 	
@@ -22,10 +22,10 @@ public class ReverseList<T> {
 		String s = "[";
 		Node<T> item = first;
 		while (null != item) {
-			s += item.data;
-			if (null != item.next)
+			s += item.getData();
+			if (null != item.getNext())
 				s += ", ";
-			item = item.next;
+			item = item.getNext();
 		}
 		s += "]";
 		return s;
