@@ -2,11 +2,11 @@ package HomeWork151001;
 
 import java.util.Iterator;
 
-public class MyArrayStack implements Iterable<Integer>{
+public class MyArrayStack<T> implements Iterable<T>{
 
 	private Integer CAPACITY = 10;
-	private int[] data = new int[CAPACITY];
-	private int[] newData;
+	private T[] data = (T[]) new Object[CAPACITY];
+	private T[] newData;
 	private Integer top = -1; // index of the toppest item
 
 	public MyArrayStack(Integer newCapacity) {
@@ -15,7 +15,7 @@ public class MyArrayStack implements Iterable<Integer>{
 		this.CAPACITY = newCapacity;
 	}
 
-	public void push(int item) {
+	public void push(T item) {
 		
 		if ((size() + 1) > CAPACITY)
 			this.resize(CAPACITY * 2);
@@ -24,12 +24,12 @@ public class MyArrayStack implements Iterable<Integer>{
 			"  top: " + top + "  CAPACITY: " + CAPACITY);
 	}
 
-	public int pop() {
+	public T pop() {
 		
 		if (isEmpty()) 
 			throw new NullPointerException("Can't pop from empty stack");
 		
-		int returnData = data[top--];
+		T returnData = data[top--];
 		System.out.println("<- " + returnData + 
 			"  top: " + top + "  CAPACITY: " + CAPACITY);
 		if ((size() * 4) < CAPACITY)
@@ -37,7 +37,7 @@ public class MyArrayStack implements Iterable<Integer>{
 		return returnData;
 	}
 
-	public int top() {
+	public T top() {
 
 		if (isEmpty()) 
 			throw new NullPointerException("stack is empty");
@@ -54,8 +54,8 @@ public class MyArrayStack implements Iterable<Integer>{
 	}
 	
 	@Override
-	public Iterator<Integer> iterator() {
-		return new Iterator<Integer>() {
+	public Iterator<T> iterator() {
+		return new Iterator<T>() {
 
 			private Integer current = top;
 			
@@ -65,7 +65,7 @@ public class MyArrayStack implements Iterable<Integer>{
 			}
 
 			@Override
-			public Integer next() {
+			public T next() {
 				return data[current--];
 			}
 			
@@ -79,7 +79,7 @@ public class MyArrayStack implements Iterable<Integer>{
 		if (newCapacity < 1) 
 			throw new IllegalArgumentException("Capacity is too small");
 		
-		newData = new int[newCapacity];
+		newData = (T[])new Object[newCapacity];
 		for (int i = 0; i <= top; i++) {
 			newData[i] = data[i];
 		}
@@ -90,20 +90,23 @@ public class MyArrayStack implements Iterable<Integer>{
 
 	public static void main(String[] args) {
 		
-		MyArrayStack stack = new MyArrayStack(2);
+		MyArrayStack<Integer> stack = new MyArrayStack(2);
+		
 		for (int i = 0; i < 13; i++) 
 			stack.push(i);
 
-		System.out.print("stack: [");
 		Iterator<Integer> it1 = stack.iterator();
+		System.out.print("stack: [");
 		while (it1.hasNext()) {
 			System.out.print(it1.next() + ", ");
 		}
 		System.out.println("]");
 		
 		System.out.println("top: " + stack.top());
+		
 		for (int i = 0; i < 12; i++) 
 			stack.pop();
+
 		stack.push(101);
 		stack.push(102);
 		
@@ -117,7 +120,9 @@ public class MyArrayStack implements Iterable<Integer>{
 		for (int i = 0; i < 3; i++) 
 			stack.pop();
 		stack.push(1001);
+
 		System.out.println("top: " + stack.top());
+
 		stack.push(1002);
 		stack.push(1003);
 		for (int i = 0; i < 3; i++) 
