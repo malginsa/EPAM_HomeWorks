@@ -53,6 +53,7 @@ public class MyArrayStack<T> implements Iterable<T>{
 		return 0 == size();
 	}
 	
+	// iterate over stack from top to bottom
 	@Override
 	public Iterator<T> iterator() {
 		return new Iterator<T>() {
