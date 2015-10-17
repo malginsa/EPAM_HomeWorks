@@ -1,14 +1,13 @@
 package HomeWork151008;
 
-import java.util.Iterator;
-
 // Generate elements of matrix in threads
 
+import java.util.Iterator;
 import java.util.Random;
 
 import org.omg.SendingContext.RunTime;
 
-public class HomeWork {
+public class GenerateInThreads {
 
 	static final int rows = 10;
 	static final int cols = 8_000_000;
